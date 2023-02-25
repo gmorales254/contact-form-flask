@@ -1,0 +1,42 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<h1>Contact form</h1>
+<form action="/new" method="POST">
+    <input type="text" name="fullname" placeholder="Write your fullname" />
+    <input type="text" name="email" placeholder="Write your email" />
+    <input type="text" name="phone" placeholder="Write your phone" />
+    <button>Save</button>
+</form>
+{%include('/partials/_message.html')%}
+<div>
+    <table>
+        <thead>
+            <th>
+                Fullname
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Action
+            </th>
+        </thead>
+        <tbody>
+            {% for contact in contacts%}
+            <tr>
+                <td>{{contact.fullname}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.phone}}</td>
+                <td><a href={{url_for('contacts.update', id=contact.id)}}>✏️</a><a href={{url_for('contacts.delete',
+                        id=contact.id)}}>❌</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{%endblock%}
